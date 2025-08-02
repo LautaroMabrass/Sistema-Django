@@ -6,7 +6,7 @@ TiendaOnline es una aplicación web desarrollada con Django para la gestión de 
 
 ## Esquema de Base de Datos
 
-![Esquema Base de Datos](imagen_db.png)
+![Esquema Base de Datos](DBdiag.png)
 
 ---
 
@@ -14,6 +14,7 @@ TiendaOnline es una aplicación web desarrollada con Django para la gestión de 
 
 - Python 3.x instalado  
 - Docker y Docker Compose instalados
+- Crear una carpeta media dentro de miApp, alli se almacenaran localmente las imagenes de la base de datos.
 
 ---
 
