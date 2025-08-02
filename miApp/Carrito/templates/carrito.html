@@ -2,25 +2,39 @@
 {% block title %}Carrito de Compras{% endblock %}
 
 {% block content %}
-<h2 class="mb-4 text-center">Tu Carrito</h2>
+<h2 class="mb-4 text-center">🛒 Tu Carrito</h2>
 
-{% if carrito %}
+{% if carro %}
 <ul class="list-group mb-4">
-    {% for item in carrito %}
-    <li
-        class="list-group-item d-flex justify-content-between align-items-center">
-        {{ item.nombre }} - ${{ item.precio }}
-        <span class="badge bg-secondary rounded-pill">{{ item.cantidad }}</span>
+    {% for id, item in carro.items %}
+    <li class="list-group-item d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center">
+            <img src="{{ item.imagen }}" alt="{{ item.nombre }}" class="rounded me-3" style="width: 80px; height: 80px; object-fit: cover;">
+            <div>
+                <h6 class="mb-1">{{ item.nombre }}</h6>
+                <small class="text-muted">Precio: ${{ item.precio }}</small><br>
+                <small class="text-muted">Cantidad: {{ item.cantidad }}</small>
+            </div>
+        </div>
+        <div class="d-flex flex-column align-items-end">
+                        <a href="{% url 'agregarProductoCarrito' id %}" class="btn btn-sm btn-outline-success mb-2">+ Agregar</a>
+            <a href="{% url 'quitarProductoCarrito' id %}" class="btn btn-sm btn-outline-secondary mbt-2">− Quitar</a>
+            <a href="{% url 'eliminarProductoCarrito' id %}" class="btn btn-sm btn-outline-danger mt-2">Eliminar</a>
+        </div>
     </li>
     {% endfor %}
 </ul>
-<div class="text-end">
-    <strong>Total: ${{ total }}</strong>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <a href="{% url 'vaciarCarroCarrito' %}" class="btn btn-outline-danger">Vaciar carrito</a>
+    <div class="fw-bold fs-5">Total: ${{ total }}</div>
 </div>
-<div class="text-center mt-4">
-    <a href="/checkout/" class="btn btn-success">Finalizar Compra</a>
+
+<div class="text-center">
+    <a href="{%url 'compra'%}" class="btn btn-success btn-lg">Finalizar Compra</a>
 </div>
 {% else %}
-<p class="text-center">Tu carrito está vacío.</p>
+<p class="text-center text-muted">Tu carrito está vacío.</p>
 {% endif %}
 {% endblock %}
+

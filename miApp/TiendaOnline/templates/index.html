@@ -5,10 +5,15 @@
 
 <header class="bg-dark text-white text-center py-5 shadow">
     <div class="container">
-        <h1 class="display-4 fw-bold">Bienvenido a VíaExpress Global</h1>
+        <h1 class="display-4 fw-bold">
+            {%if request.user.is_authenticated%} VíaExpress Global te da una calida bienvenida {{request.user.username}}
+            {%else%}
+            Bienvenido a VíaExpress Global
+            {%endif%}
+        </h1>
         <p class="lead mt-3">Productos de calidad con envíos internacionales y
             atención personalizada.</p>
-        <a href="/productos/" class="btn btn-outline-light btn-lg mt-4">Explorar
+        <a href="{%url 'productos'%}" class="btn btn-outline-light btn-lg mt-4">Explorar
             productos</a>
     </div>
 </header>
@@ -60,7 +65,7 @@
         <p class="fs-5">Nuestro equipo está disponible <strong>las 24 horas, los
                 7 días de la semana</strong> para resolver tus dudas y
             acompañarte en tu compra.</p>
-        <a href="/contactos/"
+        <a href="{%url 'contacto'%}"
             class="btn btn-outline-light btn-lg mt-3">Contactanos ahora</a>
     </div>
 </section>

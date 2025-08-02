@@ -14,7 +14,8 @@
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-4 shadow-sm">
             <div class="container">
-                <a class="navbar-brand fs-3 fw-bold" href="{% url 'index' %}">MiTienda</a>
+                <a class="navbar-brand fs-3 fw-bold"
+                    href="{% url 'index' %}">MiTienda</a>
                 <button class="navbar-toggler" type="button"
                     data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false"
@@ -27,6 +28,7 @@
                         <li class="nav-item"><a
                                 class="nav-link fs-5 {% if request.path == '/'%} active text-warning {% else %} text-light {% endif %} fw-semibold me-3 active"
                                 href="{% url 'index' %}">Inicio</a></li>
+                        {% if request.user.is_authenticated %}
                         <li class="nav-item"><a
                                 class="nav-link fs-5 {% if request.path == '/productos/'%} active text-warning {% else %} text-light {% endif %} fw-semibold me-3 active"
                                 href="{% url 'productos' %}">Productos</a></li>
@@ -36,15 +38,16 @@
                         <li class="nav-item"><a
                                 class="nav-link fs-5 {% if request.path == '/contacto/'%} active text-warning {% else %} text-light {% endif %} fw-semibold me-3 active"
                                 href="{% url 'contacto' %}">Contacto</a></li>
+                        <li class="nav-item"><a class="btn btn-danger"
+                                href="/logout/">Logout</a></li>
+                        {%else%}
                         <li class="nav-item"><a
                                 class="btn {%if request.path == '/login/'%} btn-light {%else%}btn-outline-light me-2 {%endif%}"
                                 href="{% url 'login' %}">Login</a></li>
-                        <li class="nav-item"><a class="btn {%if request.path == '/register/'%} btn-light {%else%}btn-outline-light me-2 {%endif%}"
+                        <li class="nav-item"><a
+                                class="btn {%if request.path == '/register/'%} btn-light {%else%}btn-outline-light me-2 {%endif%}"
                                 href="{% url 'register' %}">Register</a></li>
-                        <li class="nav-item"><span class="text-light me-3">Hola,
-                                {{ request.user.username }}</span></li>
-                        <li class="nav-item"><a class="btn btn-danger"
-                                href="/logout/">Logout</a></li>
+                        {%endif%}
                     </ul>
                 </div>
             </div>

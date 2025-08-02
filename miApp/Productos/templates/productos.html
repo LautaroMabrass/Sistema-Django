@@ -14,14 +14,15 @@
             <div class="col">
                 <div class="card h-100 shadow-sm">
                     <img src="{{ producto.url.url }}" class="card-img-top"
-                        alt="{{ producto.nombre }}">
+                        alt="{{ producto.nombre }}"
+                        style="width: 100%; height: 200px; object-fit: cover;">
                     <div class="card-body">
                         <h5 class="card-title">{{ producto.nombre }}</h5>
                         <p class="card-text">{{ producto.descripcion }}</p>
                         <p class="fw-bold">$ {{ producto.precio }}</p>
-                            <button type="submit"
-                                class="btn btn-primary">Agregar al
-                                carrito</button>
+                        <a href="{% url 'agregarProducto' producto.id %}"
+                            class="btn btn-primary">Agregar al carrito</a>
+
                     </div>
                 </div>
             </div>
@@ -32,23 +33,38 @@
     <!-- Vista previa del carrito -->
     <div class="col-md-4">
         <div class="card shadow-sm sticky-top" style="top: 100px;">
-            <div class="card-header bg-dark text-white">
+            <div
+                class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">🛒 Carrito</h5>
+                {% if carro %}
+                <a href="{% url 'vaciarCarro' %}"
+                    class="btn btn-sm btn-danger">Vaciar</a>
+                {% endif %}
             </div>
             <div class="card-body">
-                {% if carrito %}
+                {% if carro %}
                 <ul class="list-group list-group-flush mb-3">
-                    {% for item in carrito %}
+                    {% for id, item in carro.items %}
                     <li
                         class="list-group-item d-flex justify-content-between align-items-center">
-                        <span>{{ item.nombre }}</span>
-                        <span>x{{ item.cantidad }}</span>
+                        <div class="d-flex align-items-center">
+                            <img src="{{ item.imagen }}"
+                                alt="imagen de {{ item.nombre }}"
+                                class="me-2 rounded"
+                                style="width: 80px; height: 80px; object-fit: cover;">
+                            <div>
+                                <div>{{ item.nombre }}</div>
+                                <small class="text-muted">x{{item.cantidad}}</small>
+                            </div>
+                        </div>
+                        <a href="{% url 'quitarProducto' id %}"
+                            class="btn btn-sm btn-outline-secondary">−</a>
                     </li>
                     {% endfor %}
                 </ul>
                 <div class="text-end fw-bold">Total: ${{ total }}</div>
                 <div class="d-grid mt-3">
-                    <a href="/carrito/" class="btn btn-success">Ir al
+                    <a href="{%url 'carrito'%}" class="btn btn-success">Ir al
                         carrito</a>
                 </div>
                 {% else %}
@@ -58,5 +74,6 @@
             </div>
         </div>
     </div>
+
 </div>
 {% endblock %}
