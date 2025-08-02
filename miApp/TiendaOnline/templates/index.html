@@ -13,7 +13,7 @@
         </h1>
         <p class="lead mt-3">Productos de calidad con envíos internacionales y
             atención personalizada.</p>
-        <a href="{%url 'productos'%}" class="btn btn-outline-light btn-lg mt-4">Explorar
+        <a href="{% if request.user.is_authenticated %} {% url 'productos' %}  {% else %} {% url 'register' %} {%endif%}" class="btn btn-outline-light btn-lg mt-4">Explorar
             productos</a>
     </div>
 </header>
@@ -65,7 +65,7 @@
         <p class="fs-5">Nuestro equipo está disponible <strong>las 24 horas, los
                 7 días de la semana</strong> para resolver tus dudas y
             acompañarte en tu compra.</p>
-        <a href="{%url 'contacto'%}"
+        <a href="{% if request.user.is_authenticated %} {% url 'contacto' %}  {% else %} {% url 'register' %} {%endif%}"
             class="btn btn-outline-light btn-lg mt-3">Contactanos ahora</a>
     </div>
 </section>

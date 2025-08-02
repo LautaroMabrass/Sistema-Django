@@ -39,13 +39,13 @@
                                 class="nav-link fs-5 {% if request.path == '/contacto/'%} active text-warning {% else %} text-light {% endif %} fw-semibold me-3 active"
                                 href="{% url 'contacto' %}">Contacto</a></li>
                         <li class="nav-item"><a class="btn btn-danger"
-                                href="/logout/">Logout</a></li>
+                                href="{%url 'logout' %}">Logout</a></li>
                         {%else%}
                         <li class="nav-item"><a
-                                class="btn {%if request.path == '/login/'%} btn-light {%else%}btn-outline-light me-2 {%endif%}"
+                                class="btn {%if request.path == '/login/'%} btn-light me-2 {%else%}btn-outline-light me-2 {%endif%}"
                                 href="{% url 'login' %}">Login</a></li>
                         <li class="nav-item"><a
-                                class="btn {%if request.path == '/register/'%} btn-light {%else%}btn-outline-light me-2 {%endif%}"
+                                class="btn {%if request.path == '/register/'%} btn-light me-2 {%else%}btn-outline-light me-2 {%endif%}"
                                 href="{% url 'register' %}">Register</a></li>
                         {%endif%}
                     </ul>

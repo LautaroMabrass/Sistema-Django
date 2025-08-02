@@ -2,10 +2,50 @@
 {% block title %}Iniciar Sesión{% endblock %}
 
 {% block content %}
-<h2 class="mb-4 text-center">Iniciar Sesión</h2>
-<form method="POST" class="w-50 mx-auto">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-dark">Ingresar</button>
-</form>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow">
+                <div class="card-header bg-dark text-white text-center">
+                    <h4 class="mb-0">Iniciar Sesión</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST" novalidate>
+                        {% csrf_token %}
+
+                        {% for field in form %}
+                        <div class="mb-3">
+                            <label class="form-label"
+                                for="{{ field.id_for_label }}">{{ field.label}}</label>
+                            {{ field}}
+                            {% if field.errors %}
+                            <div class="text-danger small">
+                                {{ field.errors|striptags }}
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                        {% if messages %}
+                        <div>
+                            {% for message in messages %}
+                            <div class="text-danger medium">
+                                {{ message }}
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        <div class="d-grid">
+                            <button type="submit"
+                                class="btn btn-dark">Ingresar</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center">
+                    ¿No tenés cuenta? <a href="{% url 'register' %}">Registrate
+                        acá</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

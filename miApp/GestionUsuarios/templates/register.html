@@ -6,8 +6,19 @@
     <h2 class="mb-4 text-center">Crear una cuenta</h2>
     <div class="card shadow w-50 mx-auto">
         <div class="card-body">
-            <form method="POST">
+            <form method="POST" novalidate>
                 {% csrf_token %}
+                
+                {% if messages %}
+                    <div>
+                        {% for message in messages %}
+                            <div class="text-danger medium">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                
                 {% for field in form %}
                     <div class="mb-3">
                         <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
@@ -15,9 +26,11 @@
                         {% if field.help_text %}
                             <div class="form-text text-muted">{{ field.help_text }}</div>
                         {% endif %}
-                        {% for error in field.errors %}
-                            <div class="text-danger small">{{ error }}</div>
-                        {% endfor %}
+                        {% if field.errors %}
+                            <div class="text-danger small">
+                                {{ field.errors|striptags }}
+                            </div>
+                        {% endif %}
                     </div>
                 {% endfor %}
                 <div class="d-grid">
@@ -28,4 +41,3 @@
     </div>
 </div>
 {% endblock %}
-
