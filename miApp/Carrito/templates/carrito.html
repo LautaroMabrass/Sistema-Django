@@ -1,0 +1,26 @@
+{% extends "nav/nav.html" %}
+{% block title %}Carrito de Compras{% endblock %}
+
+{% block content %}
+<h2 class="mb-4 text-center">Tu Carrito</h2>
+
+{% if carrito %}
+<ul class="list-group mb-4">
+    {% for item in carrito %}
+    <li
+        class="list-group-item d-flex justify-content-between align-items-center">
+        {{ item.nombre }} - ${{ item.precio }}
+        <span class="badge bg-secondary rounded-pill">{{ item.cantidad }}</span>
+    </li>
+    {% endfor %}
+</ul>
+<div class="text-end">
+    <strong>Total: ${{ total }}</strong>
+</div>
+<div class="text-center mt-4">
+    <a href="/checkout/" class="btn btn-success">Finalizar Compra</a>
+</div>
+{% else %}
+<p class="text-center">Tu carrito está vacío.</p>
+{% endif %}
+{% endblock %}
