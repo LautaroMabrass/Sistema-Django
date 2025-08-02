@@ -1,0 +1,65 @@
+{% extends "miApp/miApp/plantillas/nav/nav.html" %}
+
+{% block title %}Productos - Tienda Online{% endblock %}
+
+{% block content %}
+<h1 class="mb-4 text-center">Tienda Online</h1>
+<div class="row">
+    <!-- Sección de productos -->
+    <div class="col-md-8">
+        <h2 class="mb-4">Nuestros Productos</h2>
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            {% for producto in productos %}
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <img src="{{ producto.imagen.url }}" class="card-img-top"
+                        alt="{{ producto.nombre }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ producto.nombre }}</h5>
+                        <p class="card-text">{{ producto.descripcion }}</p>
+                        <p class="fw-bold">$ {{ producto.precio }}</p>
+                        <form method="POST"
+                            action="{% url 'agregar_al_carrito' producto.id %}">
+                            {% csrf_token %}
+                            <button type="submit"
+                                class="btn btn-primary">Agregar al
+                                carrito</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Vista previa del carrito -->
+    <div class="col-md-4">
+        <div class="card shadow-sm sticky-top" style="top: 100px;">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">🛒 Carrito</h5>
+            </div>
+            <div class="card-body">
+                {% if carrito %}
+                <ul class="list-group list-group-flush mb-3">
+                    {% for item in carrito %}
+                    <li
+                        class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>{{ item.nombre }}</span>
+                        <span>x{{ item.cantidad }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <div class="text-end fw-bold">Total: ${{ total }}</div>
+                <div class="d-grid mt-3">
+                    <a href="/carrito/" class="btn btn-success">Ir al
+                        carrito</a>
+                </div>
+                {% else %}
+                <p class="text-muted text-center mb-0">Tu carrito está
+                    vacío.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

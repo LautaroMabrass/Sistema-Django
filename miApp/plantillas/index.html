@@ -1,11 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>hola</h1>
-</body>
-</html>
+ {% extends "nav/nav.html" %}
+
+{% block title %}Inicio - Tienda Online{% endblock %}
+{% block content %}
+
+<header class="bg-dark text-white text-center py-5 shadow">
+    <div class="container">
+        <h1 class="display-4 fw-bold">Bienvenido a VíaExpress Global</h1>
+        <p class="lead mt-3">Productos de calidad con envíos internacionales y
+            atención personalizada.</p>
+        <a href="/productos/" class="btn btn-outline-light btn-lg mt-4">Explorar
+            productos</a>
+    </div>
+</header>
+
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">¿Quiénes somos?</h2>
+        <p class="text-center fs-5">
+            En <strong>VíaExpress Global</strong> nos dedicamos a conectar
+            personas con productos únicos y de alta calidad.
+            Con más de 10 años en el mercado, ofrecemos una experiencia de
+            compra simple, segura y accesible desde cualquier parte del mundo.
+        </p>
+    </div>
+</section>
+
+<section class="bg-light py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">¿Por qué elegirnos?</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4 text-center">
+            <div class="col">
+                <div class="p-4 border rounded shadow-sm h-100">
+                    <h5 class="fw-bold">🌎 Envíos internacionales</h5>
+                    <p>Hacemos llegar tus productos a cualquier parte del mundo
+                        de forma rápida y segura.</p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="p-4 border rounded shadow-sm h-100">
+                    <h5 class="fw-bold">💳 Pagos seguros</h5>
+                    <p>Tu información está protegida. Trabajamos con las
+                        principales pasarelas de pago.</p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="p-4 border rounded shadow-sm h-100">
+                    <h5 class="fw-bold">📦 Productos garantizados</h5>
+                    <p>Calidad verificada en cada uno de nuestros artículos.
+                        Garantía de satisfacción.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bg-dark text-white py-5 mb-5    ">
+    <div class="container text-center">
+        <h2 class="mb-3">¿Necesitás ayuda?</h2>
+        <p class="fs-5">Nuestro equipo está disponible <strong>las 24 horas, los
+                7 días de la semana</strong> para resolver tus dudas y
+            acompañarte en tu compra.</p>
+        <a href="/contactos/"
+            class="btn btn-outline-light btn-lg mt-3">Contactanos ahora</a>
+    </div>
+</section>
+
+{% endblock %}

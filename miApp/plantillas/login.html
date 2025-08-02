@@ -1,0 +1,11 @@
+{% extends "nav/nav.html" %}
+{% block title %}Iniciar Sesión{% endblock %}
+
+{% block content %}
+<h2 class="mb-4 text-center">Iniciar Sesión</h2>
+<form method="POST" class="w-50 mx-auto">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-dark">Ingresar</button>
+</form>
+{% endblock %}
