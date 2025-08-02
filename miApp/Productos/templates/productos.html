@@ -1,8 +1,9 @@
 {% extends "nav/nav.html" %}
-
+{% load static %}
 {% block title %}Productos - Tienda Online{% endblock %}
 
 {% block content %}
+
 <h1 class="mb-4 text-center">Tienda Online</h1>
 <div class="row">
     <!-- Sección de productos -->
@@ -12,19 +13,15 @@
             {% for producto in productos %}
             <div class="col">
                 <div class="card h-100 shadow-sm">
-                    <img src="{{ producto.imagen.url }}" class="card-img-top"
+                    <img src="{{ producto.url.url }}" class="card-img-top"
                         alt="{{ producto.nombre }}">
                     <div class="card-body">
                         <h5 class="card-title">{{ producto.nombre }}</h5>
                         <p class="card-text">{{ producto.descripcion }}</p>
                         <p class="fw-bold">$ {{ producto.precio }}</p>
-                        <form method="POST"
-                            action="{% url 'agregar_al_carrito' producto.id %}">
-                            {% csrf_token %}
                             <button type="submit"
                                 class="btn btn-primary">Agregar al
                                 carrito</button>
-                        </form>
                     </div>
                 </div>
             </div>
