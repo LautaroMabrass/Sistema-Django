@@ -1,2 +1,35 @@
+# Entornos virtuales
+venv/
 django_env/
+
+# Variables de entorno
+.env
+*.env
+
+# Archivos de medios subidos por el usuario
+media/
+
+# Archivos de migración de Django (excepto __init__.py)
+**/migrations/
+!*/migrations/__init__.py
+
+# Bytecode y cachés de Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Archivos de logs y temporales
+*.log
+*.tmp
+
+# Configuración del editor
+.vscode/
+.idea/
+
+# Archivos de sistema operativo
+.DS_Store
+Thumbs.db
+
+# Volúmenes o backups locales
 .volumes/
