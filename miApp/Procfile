@@ -1,2 +1,1 @@
-web: gunicorn miApp.TiendaOnline.wsgi --bind 0.0.0.0:$PORT
-
+web: gunicorn TiendaOnline.wsgi --bind 0.0.0.0:$PORT
