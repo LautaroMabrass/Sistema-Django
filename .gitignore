@@ -6,12 +6,10 @@ django_env/
 .env
 *.env
 
-# Archivos de medios subidos por el usuario
+# Archivos de medios subidos por el usuario 
 media/
-
-# Archivos de migración de Django (excepto __init__.py)
-**/migrations/
-!*/migrations/__init__.py
+**/migrations/*.pyc
+**/migrations/__pycache__/
 
 # Bytecode y cachés de Python
 __pycache__/
