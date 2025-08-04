@@ -91,3 +91,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Clave primaria por defecto
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#CSRF
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
