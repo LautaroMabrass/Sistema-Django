@@ -1,0 +1,12 @@
+{% extends "nav/nav.html" %}
+{% block title %}Carrito Vacío{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="alert alert-warning text-center">
+        <h2>Tu carrito está vacío</h2>
+        <p>Agrega productos antes de confirmar tu compra.</p>
+        <a href="{% url 'productos' %}" class="btn btn-secondary mt-3">Explorar productos</a>
+    </div>
+</div>
+{% endblock %}

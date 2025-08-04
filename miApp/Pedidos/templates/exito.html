@@ -1,0 +1,12 @@
+{% extends "nav/nav.html" %}
+{% block title %}Pedido Confirmado{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="alert alert-success text-center">
+        <h2>¡Gracias por tu compra!</h2>
+        <p>Tu pedido ha sido confirmado con el ID: <strong>{{ pedido_id }}</strong></p>
+        <a href="{% url 'index' %}" class="btn btn-primary mt-3">Volver al inicio</a>
+    </div>
+</div>
+{% endblock %}

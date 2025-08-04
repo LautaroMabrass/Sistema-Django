@@ -1,5 +1,47 @@
 {% extends "nav/nav.html" %}
-{% block title %}Carrito de Compras{% endblock %}
+{% block title %}Confirmar Compra{% endblock %}
 
 {% block content %}
-{% endblock%}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Resumen de tu compra</h2>
+
+    {% if carro %}
+    <div class="table-responsive">
+        <table class="table table-bordered shadow-sm">
+            <thead class="table-dark">
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.nombre }}</td>
+                    <td>{{ item.cantidad }}</td>
+                    <td>${{ item.precio }}</td>
+                    <td>${{ item.subtotal }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="text-end mb-4">
+        <h5 class="fw-bold">Total: ${{ total }}</h5>
+    </div>
+
+    <div class="text-center">
+        <a href="{% url 'verificar' %}"
+            class="btn btn-success btn-lg">Confirmar Compra</a>
+    </div>
+
+    {% else %}
+    <div class="alert alert-info text-center">
+        Tu carrito está vacío.
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'GestionUsuarios',
     'Contacto',
     'Productos',
+    'Pedidos',
 ]
 
 MIDDLEWARE = [
