@@ -20,7 +20,7 @@ class Carro:
                 "nombre": producto.nombre,
                 "precio": str(producto.precio),
                 "cantidad": 1,
-                "imagen": producto.url.url
+                "imagen": producto.url
             }
         else:
             self.carro[producto_id]["cantidad"] += 1
