@@ -7,9 +7,20 @@
     <div class="text-center">
         <div class="alert alert-success shadow p-4 rounded" role="alert">
             <h4 class="alert-heading">¡Información enviada correctamente!</h4>
-            <p>Gracias por contactarte con nosotros. Te responderemos a la brevedad.</p>
+            <p>Gracias por contactarte con nosotros. Te responderemos a la brevedad al mail {{request.user.email|default:"(sin email registrado)"}}.</p>
             <hr>
             <a href="{% url 'index' %}" class="btn btn-outline-success mt-3">Volver al inicio</a>
+        </div>
+    </div>
+</div>
+{% elif 'novalido' in request.GET%}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+    <div class="text-center">
+        <div class="alert alert-danger shadow p-4 rounded" role="alert">
+            <h4 class="alert-heading">¡A ocurrido un error inesperado!</h4>
+            <p>Lo sentimos!</p>
+            <hr>
+            <a href="{% url 'index' %}" class="btn btn-outline-danger mt-3">Volver al inicio</a>
         </div>
     </div>
 </div>

@@ -3,7 +3,7 @@ from .models import Pedido, LineaPedido
 from Carrito.carro import Carro
 from Productos.models import Producto
 from django.contrib.auth.decorators import login_required
-
+from django.core.mail import EmailMessage
 # Create your views here.
 
 @login_required(login_url='/login/')
@@ -23,9 +23,23 @@ def verificarCompra(request):
             cantidad=datos['cantidad'],
             precio=datos['precio']
         )
-    # Vaciar carrito 
+
+    productos = []
+    for producto_id, datos in carro.carro.items():
+        producto = Producto.objects.get(id=producto_id)
+        productos.append(f"- {producto.nombre} x {datos['cantidad']}")
+    email = EmailMessage(
+        subject=f"PEDIDO NUMERO {pedido.id}",
+        body=f"Nuevo pedido de {request.user.username}:\n\n" + "\n".join(productos),
+        from_email=request.user.email,
+        to=["appwebmail2025@gmail.com"],
+    )
+    try:
+        email.send()
+    except Exception as e:
+        print("Error al enviar:", e)
+    # Vaciar carrito
     carro.vaciar()
-    
     return redirect('confirmado', pedido_id=pedido.id)
 
 # Vista exito
