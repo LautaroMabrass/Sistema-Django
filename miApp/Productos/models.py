@@ -17,7 +17,7 @@ class CategoriaProducto(models.Model):
 class Producto(models.Model):
     nombre = models.CharField()
     categoria = models.ForeignKey(CategoriaProducto, on_delete=models.CASCADE)
-    url = models.ImageField(upload_to='tienda')
+    url = models.URLField()
     precio = models.FloatField()
     stock = models.IntegerField()
     disponible = models.BooleanField(default=True)
