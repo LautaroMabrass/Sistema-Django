@@ -64,7 +64,7 @@ WSGI_APPLICATION = 'TiendaOnline.wsgi.application'
 # Base de datos
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgres://postgres:postgres@localhost:5432/django',
+        default='postgresql://usuario:password@localhost:5432/db_local',
         conn_max_age=600,
         ssl_require=True
     )
