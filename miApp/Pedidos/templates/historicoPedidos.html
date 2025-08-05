@@ -23,7 +23,7 @@
                     <td class="text-start">
                         <ul class="mb-0 list-unstyled">
                             {% for linea in pedido.lineapedido_set.all %}
-                            <li>🛒 {{ linea.producto.nombre }} x {{ linea.cantidad }}</li>
+                            <li>{{ linea.producto.nombre }} x {{ linea.cantidad }}</li>
                             {% endfor %}
                         </ul>
                     </td>
