@@ -5,9 +5,26 @@
 {% block content %}
 
 <h1 class="mb-4 text-center">Tienda Online</h1>
+
+<!-- Botón carrito visible solo en móvil -->
+<button type="button" class="btn btn-primary rounded-circle position-fixed d-md-none" 
+        style="bottom: 20px; right: 20px; width: 60px; height: 60px; z-index: 1050;"
+        data-bs-toggle="offcanvas" data-bs-target="#offcanvasCarrito" aria-controls="offcanvasCarrito" aria-label="Abrir carrito">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="white" class="bi bi-cart" viewBox="0 0 16 16">
+    <path d="M0 1.5A.5.5 0 0 1 .5 1h1a.5.5 0 0 1 .485.379L2.89 5H14.5a.5.5 0 0 1 .49.598l-1.5 7A.5.5 0 0 1 13 13H4a.5.5 0 0 1-.491-.408L1.01 2H.5a.5.5 0 0 1-.5-.5zm3.14 4l1.25 5.5h7.22l1.25-5.5H3.14z"/>
+    <path d="M5.5 16a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm7 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+  </svg>
+  {% if total and total > 0 %}
+  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+    {{ total }}
+    <span class="visually-hidden">productos en carrito</span>
+  </span>
+  {% endif %}
+</button>
+
 <div class="row">
-    <!-- Sección de productos -->
-    <div class="col-md-8">
+    <!-- Productos -->
+    <div class="col-12 col-md-8">
         <h2 class="mb-4">Nuestros Productos</h2>
         <div class="row row-cols-1 row-cols-md-2 g-4">
             {% for producto in productos %}
@@ -20,7 +37,6 @@
                         <p class="fw-bold">$ {{ producto.precio }}</p>
                         <a href="{% url 'agregarProducto' producto.id %}"
                             class="btn btn-primary">Agregar al carrito</a>
-
                     </div>
                 </div>
             </div>
@@ -28,50 +44,76 @@
         </div>
     </div>
 
-    <!-- Vista previa del carrito -->
-    <div class="col-md-4">
+    <!-- Carrito fijo visible solo en md+ -->
+    <div class="col-md-4 d-none d-md-block">
         <div class="card shadow-sm sticky-top" style="top: 100px;">
-            <div
-                class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+            <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">🛒 Carrito</h5>
                 {% if carro %}
-                <a href="{% url 'vaciarCarro' %}"
-                    class="btn btn-sm btn-danger">Vaciar</a>
+                <a href="{% url 'vaciarCarro' %}" class="btn btn-sm btn-danger">Vaciar</a>
                 {% endif %}
             </div>
             <div class="card-body">
                 {% if carro %}
                 <ul class="list-group list-group-flush mb-3">
                     {% for id, item in carro.items %}
-                    <li
-                        class="list-group-item d-flex justify-content-between align-items-center">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
                         <div class="d-flex align-items-center">
-                            <img src="{{ item.imagen }}"
-                                alt="imagen de {{ item.nombre }}"
-                                class="me-2 rounded"
-                                style="width: 80px; height: 80px; object-fit: cover;">
+                            <img src="{{ item.imagen }}" alt="imagen de {{ item.nombre }}" class="me-2 rounded" style="width: 80px; height: 80px; object-fit: cover;">
                             <div>
                                 <div>{{ item.nombre }}</div>
                                 <small class="text-muted">x{{item.cantidad}}</small>
                             </div>
                         </div>
-                        <a href="{% url 'quitarProducto' id %}"
-                            class="btn btn-sm btn-outline-secondary">−</a>
+                        <a href="{% url 'quitarProducto' id %}" class="btn btn-sm btn-outline-secondary">−</a>
                     </li>
                     {% endfor %}
                 </ul>
                 <div class="text-end fw-bold">Total: ${{ total }}</div>
                 <div class="d-grid mt-3">
-                    <a href="{%url 'carrito'%}" class="btn btn-success">Ir al
-                        carrito</a>
+                    <a href="{% url 'carrito' %}" class="btn btn-success">Ir al carrito</a>
                 </div>
                 {% else %}
-                <p class="text-muted text-center mb-0">Tu carrito está
-                    vacío.</p>
+                <p class="text-muted text-center mb-0">Tu carrito está vacío.</p>
                 {% endif %}
             </div>
         </div>
     </div>
-
 </div>
+
+<!-- Offcanvas para carrito en móvil -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCarrito" aria-labelledby="offcanvasCarritoLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasCarritoLabel">🛒 Carrito</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+  </div>
+  <div class="offcanvas-body">
+    {% if carro %}
+    <div class="mb-2 d-flex justify-content-between align-items-center">
+      <a href="{% url 'vaciarCarro' %}" class="btn btn-sm btn-danger">Vaciar</a>
+    </div>
+    <ul class="list-group list-group-flush mb-3">
+      {% for id, item in carro.items %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center">
+          <img src="{{ item.imagen }}" alt="imagen de {{ item.nombre }}" class="me-2 rounded" style="width: 80px; height: 80px; object-fit: cover;">
+          <div>
+            <div>{{ item.nombre }}</div>
+            <small class="text-muted">x{{ item.cantidad }}</small>
+          </div>
+        </div>
+        <a href="{% url 'quitarProducto' id %}" class="btn btn-sm btn-outline-secondary">−</a>
+      </li>
+      {% endfor %}
+    </ul>
+    <div class="text-end fw-bold">Total: ${{ total }}</div>
+    <div class="d-grid mt-3">
+      <a href="{% url 'carrito' %}" class="btn btn-success">Ir al carrito</a>
+    </div>
+    {% else %}
+    <p class="text-muted text-center mb-0">Tu carrito está vacío.</p>
+    {% endif %}
+  </div>
+</div>
+
 {% endblock %}
